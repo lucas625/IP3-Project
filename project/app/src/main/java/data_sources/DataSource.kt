@@ -3,7 +3,7 @@ package data_sources
 import models.Anotacao
 
 class DataSource {
-    fun loadAffirmations(): List<Anotacao> {
+    fun loadAnotacoes(): List<Anotacao> {
         return listOf<Anotacao>(
                 Anotacao(
                         "lagc@cin.ufpe.br",
