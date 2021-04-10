@@ -7,40 +7,43 @@ import models.Anotacao
 
 class DataSource(resources: Resources) {
     private val initialNotesList = loadAnotacoes(resources)
-    private val notesLiveData = MutableLiveData(initialNotesList)
+    private val notesLiveData = MutableLiveData<List<Anotacao>>()
+    fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
+
+    val notesLiveData2 = MutableLiveData<List<Anotacao>>().default(initialNotesList)
 
     /* Adds anotacao to liveData and posts value. */
     fun addAnotacao(anotacao: Anotacao) {
-        val currentList = notesLiveData.value
+        val currentList = notesLiveData2.value
         if (currentList == null) {
-            notesLiveData.postValue(listOf(anotacao))
+            notesLiveData2.postValue(listOf(anotacao))
         } else {
             val updatedList = currentList.toMutableList()
             updatedList.add(0, anotacao)
-            notesLiveData.postValue(updatedList)
+            notesLiveData2.postValue(updatedList)
         }
     }
 
     /* Removes anotacao from liveData and posts value. */
     fun removeAnotacao(anotacao: Anotacao) {
-        val currentList = notesLiveData.value
+        val currentList = notesLiveData2.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()
             updatedList.remove(anotacao)
-            notesLiveData.postValue(updatedList)
+            notesLiveData2.postValue(updatedList)
         }
     }
 
     /* Returns anotacao given an ID. */
     fun getAnotacaoForId(id: Long): Anotacao? {
-        notesLiveData.value?.let { anotacaos ->
+        notesLiveData2.value?.let { anotacaos ->
             return anotacaos.firstOrNull{ it.id == id}
         }
         return null
     }
 
     fun getAnotacaosList(): LiveData<List<Anotacao>> {
-        return notesLiveData
+        return notesLiveData2
     }
     
 
