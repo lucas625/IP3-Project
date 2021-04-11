@@ -8,7 +8,7 @@ import models.Anotacao
 class DataSource(resources: Resources) {
     private val initialNotesList = loadAnotacoes(resources)
     private val notesLiveData = MutableLiveData<List<Anotacao>>()
-    fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
+    private fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
     val notesLiveData2 = MutableLiveData<List<Anotacao>>().default(initialNotesList)
 
