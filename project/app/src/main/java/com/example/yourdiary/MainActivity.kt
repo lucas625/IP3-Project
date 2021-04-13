@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
 import data_sources.loadAnotacoes
 import addNote.AddNoteActivity
 import addNote.NOTE_DATE
@@ -17,6 +16,7 @@ import androidx.activity.viewModels
 import models.Anotacao
 import noteList.NotesListViewModel
 import noteList.NotesListViewModelFactory
+import daos.AnotacaoDao
 
 class MainActivity : AppCompatActivity() {
     private val newNoteActivityRequestCode = 1
@@ -39,11 +39,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        var database = FirebaseDatabase.getInstance()
-
-        val myRef = database.getReference("anotacoes")
-
-        myRef.setValue("Test")
+        var dao = AnotacaoDao()
+        dao.list("lagc@cin.ufpe.br")
+        print(10)
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
