@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 val noteDate = data.getStringExtra(NOTE_DATE)
 
 
-                notesListViewModel.insertNote(noteTitle, noteDate, noteText)
+                notesListViewModel.insertNote(noteTitle, noteText, noteDate)
             }
         }
     }
