@@ -13,4 +13,13 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:translationX="300dp"
+        android:translationY="550dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </FrameLayout>
