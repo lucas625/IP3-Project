@@ -14,6 +14,7 @@ import addNote.NOTE_TEXT
 import addNote.NOTE_TITLE
 import android.view.View
 import androidx.activity.viewModels
+import models.Anotacao
 import noteList.NotesListViewModel
 import noteList.NotesListViewModelFactory
 
@@ -27,10 +28,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val dataset = loadAnotacoes(resources)
+        val anotacaoAdapter = AnotacaoAdapter {dataset}
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
-        recyclerView.adapter = AnotacaoAdapter(this, dataset)
+        recyclerView.adapter = anotacaoAdapter
         recyclerView.setHasFixedSize(true)
 
+        notesListViewModel.notesLiveData.observe(this, {
+            it?.let {
+                anotacaoAdapter.submitList(it as MutableList<Anotacao>)
+            }
+        })
 
         var database = FirebaseDatabase.getInstance()
 
@@ -56,8 +63,9 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.let { data ->
                 val noteTitle = data.getStringExtra(NOTE_TITLE)
-                val noteDate = data.getStringExtra(NOTE_DATE)
                 val noteText = data.getStringExtra(NOTE_TEXT)
+                val noteDate = data.getStringExtra(NOTE_DATE)
+
 
                 notesListViewModel.insertNote(noteTitle, noteDate, noteText)
             }

@@ -40,7 +40,7 @@ class NotesListViewModel(val dataSource: DataSource) : ViewModel() {
             Random.nextLong(),
                 "User",
                 noteTitle,
-            noteDate,
+                noteDate,
                 noteText,
                 byteArray
 
