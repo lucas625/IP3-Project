@@ -35,7 +35,7 @@ class DataSource(resources: Resources) {
     }
 
     /* Returns anotacao given an ID. */
-    fun getAnotacaoForId(id: Long): Anotacao? {
+    fun getAnotacaoForId(id: String): Anotacao? {
         notesLiveData2.value?.let { anotacaos ->
             return anotacaos.firstOrNull{ it.id == id}
         }

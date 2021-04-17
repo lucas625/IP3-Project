@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
 import data_sources.loadAnotacoes
 import addNote.AddNoteActivity
 import addNote.NOTE_DATE
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val dataset = loadAnotacoes(resources)
+
         val anotacaoAdapter = AnotacaoAdapter {dataset}
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
         recyclerView.adapter = anotacaoAdapter
@@ -38,12 +38,6 @@ class MainActivity : AppCompatActivity() {
                 anotacaoAdapter.submitList(it as MutableList<Anotacao>)
             }
         })
-
-        var database = FirebaseDatabase.getInstance()
-
-        val myRef = database.getReference("anotacoes")
-
-        myRef.setValue("Test")
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
