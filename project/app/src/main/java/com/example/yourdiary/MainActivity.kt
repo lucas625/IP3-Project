@@ -16,7 +16,6 @@ import androidx.activity.viewModels
 import models.Anotacao
 import noteList.NotesListViewModel
 import noteList.NotesListViewModelFactory
-import daos.AnotacaoDao
 
 class MainActivity : AppCompatActivity() {
     private val newNoteActivityRequestCode = 1
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val dataset = loadAnotacoes(resources)
+
         val anotacaoAdapter = AnotacaoAdapter {dataset}
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
         recyclerView.adapter = anotacaoAdapter
@@ -38,10 +38,6 @@ class MainActivity : AppCompatActivity() {
                 anotacaoAdapter.submitList(it as MutableList<Anotacao>)
             }
         })
-
-        var dao = AnotacaoDao()
-        dao.list("lagc@cin.ufpe.br")
-        print(10)
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {

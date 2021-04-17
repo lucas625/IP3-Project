@@ -37,7 +37,7 @@ class NotesListViewModel(val dataSource: DataSource) : ViewModel() {
         val byteArray = str.toByteArray()
 
         val newNote = Anotacao(
-            Random.nextLong(),
+            Random.nextLong().toString(),
                 "User",
                 noteTitle,
                 noteDate,
