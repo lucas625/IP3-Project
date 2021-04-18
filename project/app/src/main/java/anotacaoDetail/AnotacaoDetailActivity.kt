@@ -19,7 +19,7 @@ class AnotacaoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.anotacao_detail_activity)
 
-        var currentAnotacaoId: Long? = null
+        var currentAnotacaoId: String? = null
 
         /* Connect variables to UI elements. */
         val anotacaoTitle: TextView = findViewById(R.id.anotacao_detail_title)
@@ -29,7 +29,7 @@ class AnotacaoDetailActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
-            currentAnotacaoId = bundle.getLong(ANOTACAO_ID)
+            currentAnotacaoId = bundle.getString(ANOTACAO_ID)
         }
 
         currentAnotacaoId?.let {

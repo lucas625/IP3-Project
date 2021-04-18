@@ -9,7 +9,7 @@ import models.Anotacao
 class AnotacaoDetailViewModel(private val datasource: DataSource) : ViewModel() {
 
     /* Queries datasource to returns a note that corresponds to an id. */
-    fun getAnotacaoForId(id: Long) : Anotacao? {
+    fun getAnotacaoForId(id: String) : Anotacao? {
         return datasource.getAnotacaoForId(id)
     }
 
