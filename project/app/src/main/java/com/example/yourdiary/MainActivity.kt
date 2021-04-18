@@ -35,11 +35,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = anotacaoAdapter
         recyclerView.setHasFixedSize(true)
 
-        notesListViewModel.notesLiveData.observe(this, {
+
+        // List live update to be fixed
+     /*   notesListViewModel.notesLiveData.observe(this, {
             it?.let {
-                anotacaoAdapter.submitList(it as MutableList<Anotacao>)
+                anotacaoAdapter.submitList(it as ArrayList<Anotacao>)
             }
-        })
+        })*/
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {

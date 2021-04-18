@@ -17,15 +17,17 @@
 package noteList
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import daos.AnotacaoDao
 import data_sources.DataSource
 import models.Anotacao
 import kotlin.random.Random
 
-class NotesListViewModel(val dataSource: DataSource) : ViewModel() {
+class NotesListViewModel(val dataSource: AnotacaoDao) : ViewModel() {
 
-    val notesLiveData = dataSource.getAnotacaosList()
+    val notesLiveData = dataSource.list()
 
     /* If the name and description are present, create new Note and add it to the datasource */
     fun insertNote(noteTitle: String?, noteText: String?, noteDate: String?) {
@@ -42,11 +44,11 @@ class NotesListViewModel(val dataSource: DataSource) : ViewModel() {
                 noteTitle,
                 noteDate,
                 noteText,
-                byteArray
+                //byteArray
 
         )
 
-        dataSource.addAnotacao(newNote)
+        dataSource.create(newNote)
     }
 }
 
@@ -56,7 +58,7 @@ class NotesListViewModelFactory(private val context: Context) : ViewModelProvide
         if (modelClass.isAssignableFrom(NotesListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return NotesListViewModel(
-                dataSource = DataSource.getDataSource(context.resources)
+                dataSource = AnotacaoDao.getDataSource(context.resources)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

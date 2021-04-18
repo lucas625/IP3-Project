@@ -11,7 +11,7 @@ import models.Anotacao
                         "Minha primeira anotação",
                         "2021-04-04",
                         "Lorem Ipsum",
-                        null
+                        //null
                 ),
                 Anotacao(
                         id = "2",
@@ -19,7 +19,7 @@ import models.Anotacao
                         "Minha segunda anotação",
                         "2021-04-05",
                         "Lorem Ipsum Dolor",
-                        null
+                        //null
                 ),
                 Anotacao(
                         id = "3",
@@ -27,7 +27,7 @@ import models.Anotacao
                         "Minha 3a anotação",
                         "2021-04-05",
                         "Lorem Ipsum Dolor Color",
-                        null
+                        //null
                 )
         )
     }
