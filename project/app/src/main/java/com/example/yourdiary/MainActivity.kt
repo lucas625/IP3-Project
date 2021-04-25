@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
-import data_sources.loadAnotacoes
 import addNote.AddNoteActivity
 import addNote.NOTE_DATE
 import addNote.NOTE_TEXT
@@ -29,19 +28,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val dataset = loadAnotacoes(resources)
         val anotacaoAdapter = AnotacaoAdapter {anotacao -> adapterOnClick(anotacao)}
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
         recyclerView.adapter = anotacaoAdapter
         recyclerView.setHasFixedSize(true)
 
-
-        // List live update to be fixed
-     /*   notesListViewModel.notesLiveData.observe(this, {
-            it?.let {
-                anotacaoAdapter.submitList(it as ArrayList<Anotacao>)
-            }
-        })*/
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
