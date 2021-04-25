@@ -1,14 +1,20 @@
 package data_sources
 
 import android.content.res.Resources
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import daos.AnotacaoDao
 import models.Anotacao
 
 class DataSource(resources: Resources) {
     private val dao = AnotacaoDao()
 
+    private fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
+
+    val notesLiveData = MutableLiveData<List<Anotacao>>().default(dao.list())
+
     /* Adds anotacao to liveData and posts value. */
-    fun addAnotacao(anotacao: Anotacao) {
+    fun create(anotacao: Anotacao) {
         dao.create(anotacao)
     }
 
@@ -22,8 +28,8 @@ class DataSource(resources: Resources) {
         return dao.get(id)
     }
 
-    fun getAnotacaosList(): List<Anotacao> {
-        return dao.list()
+    fun list(): LiveData<List<Anotacao>> {
+        return notesLiveData
     }
     
 

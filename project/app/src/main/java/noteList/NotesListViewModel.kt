@@ -25,7 +25,7 @@ import data_sources.DataSource
 import models.Anotacao
 import kotlin.random.Random
 
-class NotesListViewModel(val dataSource: AnotacaoDao) : ViewModel() {
+class NotesListViewModel(val dataSource: DataSource) : ViewModel() {
 
     val notesLiveData = dataSource.list()
 
@@ -58,7 +58,7 @@ class NotesListViewModelFactory(private val context: Context) : ViewModelProvide
         if (modelClass.isAssignableFrom(NotesListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return NotesListViewModel(
-                dataSource = AnotacaoDao.getDataSource(context.resources)
+                dataSource = DataSource.getDataSource(context.resources)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
