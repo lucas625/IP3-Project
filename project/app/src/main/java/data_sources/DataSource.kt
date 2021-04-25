@@ -3,47 +3,33 @@ package data_sources
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import daos.AnotacaoDao
 import models.Anotacao
 
 class DataSource(resources: Resources) {
-    private val initialNotesList = loadAnotacoes(resources)
-    private val notesLiveData = MutableLiveData<List<Anotacao>>()
+    private val dao = AnotacaoDao()
+
     private fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
-    val notesLiveData2 = MutableLiveData<List<Anotacao>>().default(initialNotesList)
+    val notesLiveData = MutableLiveData<List<Anotacao>>().default(dao.list())
 
     /* Adds anotacao to liveData and posts value. */
-    fun addAnotacao(anotacao: Anotacao) {
-        val currentList = notesLiveData2.value
-        if (currentList == null) {
-            notesLiveData2.postValue(listOf(anotacao))
-        } else {
-            val updatedList = currentList.toMutableList()
-            updatedList.add(0, anotacao)
-            notesLiveData2.postValue(updatedList)
-        }
+    fun create(anotacao: Anotacao) {
+        dao.create(anotacao)
     }
 
     /* Removes anotacao from liveData and posts value. */
     fun removeAnotacao(anotacao: Anotacao) {
-        val currentList = notesLiveData2.value
-        if (currentList != null) {
-            val updatedList = currentList.toMutableList()
-            updatedList.remove(anotacao)
-            notesLiveData2.postValue(updatedList)
-        }
+        // TODO: Not yet implemented
     }
 
     /* Returns anotacao given an ID. */
     fun getAnotacaoForId(id: String): Anotacao? {
-        notesLiveData2.value?.let { anotacaos ->
-            return anotacaos.firstOrNull{ it.id == id}
-        }
-        return null
+        return dao.get(id)
     }
 
-    fun getAnotacaosList(): LiveData<List<Anotacao>> {
-        return notesLiveData2
+    fun list(): LiveData<List<Anotacao>> {
+        return notesLiveData
     }
     
 

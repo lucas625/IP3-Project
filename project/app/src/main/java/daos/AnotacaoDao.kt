@@ -1,9 +1,11 @@
 package daos
 
+import android.content.res.Resources
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import data_sources.DataSource
 import models.Anotacao
 import java.util.ArrayList
 
@@ -28,7 +30,7 @@ class AnotacaoDao {
                             title=it.child("title").value as String,
                             date=it.child("date").value as String,
                             text=it.child("text").value as String,
-                            photo=it.child("photo").value as ByteArray?
+                           // photo=it.child("photo").value as ByteArray?
                         )
                     )
                 }
@@ -42,6 +44,7 @@ class AnotacaoDao {
 
     fun create(anotacao: Anotacao) {
         var newAnotacao = this.anotacoesRef.push()
+        println(anotacao)
         newAnotacao.setValue(anotacao)
     }
 
@@ -56,5 +59,17 @@ class AnotacaoDao {
 
     fun list() : ArrayList<Anotacao> {
         return anotacoes
+    }
+
+    companion object {
+        private var INSTANCE: AnotacaoDao? = null
+
+        fun getDataSource(resources: Resources): AnotacaoDao {
+            return synchronized(DataSource::class) {
+                val newInstance = INSTANCE ?: AnotacaoDao()
+                INSTANCE = newInstance
+                newInstance
+            }
+        }
     }
 }
