@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
         val dataset = loadAnotacoes(resources)
         val anotacaoAdapter = AnotacaoAdapter {anotacao -> adapterOnClick(anotacao)}
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
