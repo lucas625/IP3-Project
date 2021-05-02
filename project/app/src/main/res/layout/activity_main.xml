@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="396dp"
-        android:layout_height="61dp"
+        android:layout_width="412dp"
+        android:layout_height="60dp"
         android:background="#E91E63"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -23,22 +23,21 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_anotacoes"
-        android:layout_width="391dp"
-        android:layout_height="695dp"
+        android:layout_width="403dp"
+        android:layout_height="583dp"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/list_of_anotacoes"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
