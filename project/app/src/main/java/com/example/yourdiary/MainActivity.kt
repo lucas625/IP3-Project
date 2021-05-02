@@ -13,6 +13,7 @@ import addNote.NOTE_TITLE
 import android.view.View
 import androidx.activity.viewModels
 import anotacaoDetail.AnotacaoDetailActivity
+import daos.AnotacaoDao
 import models.Anotacao
 import noteList.NotesListViewModel
 import noteList.NotesListViewModelFactory
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val notesListViewModel by viewModels<NotesListViewModel> {
         NotesListViewModelFactory(this)
     }
+    private val dao = AnotacaoDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +35,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = anotacaoAdapter
         recyclerView.setHasFixedSize(false)
 
-            // List live update to be fixed
-        notesListViewModel.notesLiveData.observe(this, {
-               it?.let {
-                   anotacaoAdapter.submitList(it as MutableList<Anotacao>)
-               }
-       })
-
-
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
             fabOnClick()
+        }
+
+        val refreshBtn: View = findViewById(R.id.refresh)
+        refreshBtn.setOnClickListener {
+            anotacaoAdapter.submitList(dao.list())
         }
     }
 

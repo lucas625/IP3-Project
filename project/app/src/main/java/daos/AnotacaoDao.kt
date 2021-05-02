@@ -44,7 +44,6 @@ class AnotacaoDao {
 
     fun create(anotacao: Anotacao) {
         var newAnotacao = this.anotacoesRef.push()
-        println(anotacao)
         newAnotacao.setValue(anotacao)
     }
 

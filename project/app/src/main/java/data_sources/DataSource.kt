@@ -11,8 +11,6 @@ class DataSource(resources: Resources) {
 
     private fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
-    val notesLiveData = MutableLiveData<List<Anotacao>>().default(dao.list())
-
     /* Adds anotacao to liveData and posts value. */
     fun create(anotacao: Anotacao) {
         dao.create(anotacao)
@@ -29,7 +27,7 @@ class DataSource(resources: Resources) {
     }
 
     fun list(): LiveData<List<Anotacao>> {
-        return notesLiveData
+        return MutableLiveData<List<Anotacao>>().default(dao.list())
     }
     
 
