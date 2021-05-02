@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_anotacoes"
-        android:layout_width="509dp"
-        android:layout_height="578dp"
+        android:layout_width="451dp"
+        android:layout_height="573dp"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fab"
