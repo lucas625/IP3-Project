@@ -36,6 +36,7 @@ class AnotacaoDetailActivity : AppCompatActivity() {
             val currentAnotacao = anotacaoDetailViewModel.getAnotacaoForId(it)
             anotacaoTitle.text = currentAnotacao?.title
             anotacaoText.text = currentAnotacao?.text
+            anotacaoDate.text = currentAnotacao?.date
 
             removeAnotacaoButton.setOnClickListener {
                 if (currentAnotacao != null) {
