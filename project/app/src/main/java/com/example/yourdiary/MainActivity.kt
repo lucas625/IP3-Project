@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.list_of_anotacoes)
         recyclerView.adapter = anotacaoAdapter
         recyclerView.setHasFixedSize(false)
+        anotacaoAdapter.submitList(dao.list())
 
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val refreshBtn: View = findViewById(R.id.refresh)
         refreshBtn.setOnClickListener {
-            anotacaoAdapter.submitList(dao.list())
+            anotacaoAdapter.notifyDataSetChanged()
         }
     }
 

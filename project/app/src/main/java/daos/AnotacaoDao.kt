@@ -17,7 +17,7 @@ class AnotacaoDao {
     private val anotacoesRef = this.database.getReference("anotacoes")
 
     init {
-        this.anotacoesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        this.anotacoesRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val children = snapshot!!.children
